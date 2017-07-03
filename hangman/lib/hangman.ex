@@ -15,4 +15,10 @@ defmodule Hangman do
   def hello do
     :world
   end
+
+  def add_player(name) do
+    Hangman.Game.register(name)
+  end
+
+  
 end
