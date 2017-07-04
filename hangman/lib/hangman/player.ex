@@ -1,7 +1,6 @@
 defmodule Player do
-    defstruct [nickname: "", wins: 0, total_games: 0, password: ""]
+  defstruct [nickname: "", wins: 0, total_games: 0, password: ""]
 
-    def new(), do: %Player{}
-
-
+  def new(), do: %Player{}
+    
 end

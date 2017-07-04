@@ -1,31 +1,37 @@
-defmodule Hangman.Game do
-  use GenServer
+defmodule Game do
+  defstruct [word: [], fails: 0, visualization: []]
 
-  def start_link do
-    GenServer.start_link(__MODULE__, [], name: :our_game)
+  def new(new_word) do
+    word = String.codepoints(new_word)
+    %Game{word: word, visualization: [List.first(word)] ++ List.duplicate("*", String.length(new_word) - 2) ++ [List.last(word)]}
   end
 
-  # to-do: register with password?
-  def register(user) when is_bitstring(user) do
-    GenServer.cast(:our_game, {:register, user})
+  def visualize(game) do
+    List.to_string(game.visualization)
   end
 
-  # DELETE THIS
-  def get_messages do
-    GenServer.call(:our_game, :get_messages)
+  def guess_letter(game, letter) when is_bitstring(letter) do
+    change_state(game, Enum.member?(game.word, letter), letter)
   end
 
-  def init(_) do
-    {:ok, %{}}
+  def change_state(game, false, _), do: %{game | fails: game.fails + 1}
+  def change_state(game, true, letter) do
+    %{game | visualization: find_index(game.visualization, game.word, letter, 0)}
   end
 
-  def handle_cast({:register, user}, state) do
-    {:noreply, Map.put(state, user, 0)} # 0 means zero wins in the game
-  end
 
-  # DELETE THIS
-  def handle_call(:get_messages, _from, messages) do 
-    {:reply, messages, messages}
+
+
+
+  defp find_index(visual, [], letter, _), do: []
+  defp find_index(visual, list, letter, index) do
+    [vhead | vtail] = visual
+    [head | tail] = list
+    if head == letter do
+      [letter] ++ find_index(vtail, tail, letter, index + 1)
+    else
+      [vhead] ++ find_index(vtail, tail, letter, index + 1)
+    end
   end
 
 end

@@ -17,7 +17,7 @@ defmodule Hangman do
   end
 
   def add_player(name) do
-    Hangman.Game.register(name)
+    Hangman.Room.register(name)
   end
 
   
