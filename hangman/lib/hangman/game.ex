@@ -22,7 +22,12 @@ defmodule Game do
   # aslo  some action when we win
   def change_state(game, false, letter), do: %{game | fails: game.fails + 1, wrong_letters: [letter] ++ game.wrong_letters}
   def change_state(game, true, letter) do
-    %{game | visualization: find_index(game.visualization, game.word, letter, 0)}
+    visual = find_index(game.visualization, game.word, letter, 0)
+    if visual == game.word do
+      %Game{word: "You won"}
+    else
+      %{game | visualization: visual}
+    end
   end
 
 
