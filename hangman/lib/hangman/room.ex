@@ -2,13 +2,16 @@ defmodule Hangman.Room do
   use GenServer
 
   def start_link do
-    GenServer.start_link(__MODULE__, [], name: :games)
+    GenServer.start_link(__MODULE__, [], name: :game)
   end
 
+  def add_player(name) do
+    GenServer.cast(:game, {:add, name})
+  end
 
   # DELETE THIS
-  def get_messages do
-    GenServer.call(:our_game, :get_messages)
+  def state do
+    GenServer.call(:game, :state)
   end
 
   def init(_) do
@@ -16,8 +19,12 @@ defmodule Hangman.Room do
   end
 
   # DELETE THIS
-  def handle_call(:get_messages, _from, messages) do 
-    {:reply, messages, messages}
+  def handle_call(:state, _from, state) do 
+    {:reply, state, state}
+  end
+
+  def handle_cast({:add, name}, state) do
+    {:noreply, Map.put(state, name, [wins: 0, fails: 0])}
   end
 
 end

@@ -5,27 +5,29 @@ defmodule Hangman.Users do
     GenServer.start_link(__MODULE__, [], name: :users)
   end
 
-  # to-do: register with password?
-  def register(user) when is_bitstring(user) do
-    GenServer.cast(:users, {:register, user})
+  def register(user, password) when is_bitstring(user) do
+    # if already exists show some stuff
+    GenServer.cast(:users, {:register, user, password})
   end
 
+  #to-do: add login
+
   # DELETE THIS
-  def get_messages do
-    GenServer.call(:users, :get_messages)
+  def state do
+    GenServer.call(:users, :state)
   end
 
   def init(_) do
-    {:ok, %{}}
+    {:ok, []}
   end
 
-  def handle_cast({:register, user}, state) do
-    {:noreply, Map.put(state, user, 0)} # 0 means zero wins in the game
+  def handle_cast({:register, user, password}, state) do
+    {:noreply, Enum.uniq([Player.new(user, password)] ++ state)}
   end
 
   # DELETE THIS
-  def handle_call(:get_messages, _from, messages) do 
-    {:reply, messages, messages}
+  def handle_call(:state, _from, state) do 
+    {:reply, state, state}
   end
 
 end

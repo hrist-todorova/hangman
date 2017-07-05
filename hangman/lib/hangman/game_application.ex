@@ -13,7 +13,8 @@ defmodule Hangman.Application do
 
     children = [
      worker(Hangman.Room, []),
-     worker(Hangman.Words, [])
+     worker(Hangman.Words, []),
+     worker(Hangman.Users, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
