@@ -7,7 +7,12 @@ defmodule Player do
     Hangman.Words.add_word(word, player)
   end
 
-  def get_word(player) do
+  def guess_word(player) do
+    word = get_word(player)
+    Game.new(word)
+  end
+
+  defp get_word(player) do
     List.first(Hangman.Words.get_all_words(player) -- player.guessed_words)
   end
     

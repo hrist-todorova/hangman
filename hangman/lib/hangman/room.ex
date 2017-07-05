@@ -2,13 +2,9 @@ defmodule Hangman.Room do
   use GenServer
 
   def start_link do
-    GenServer.start_link(__MODULE__, [], name: :our_game)
+    GenServer.start_link(__MODULE__, [], name: :games)
   end
 
-  # to-do: register with password?
-  def register(user) when is_bitstring(user) do
-    GenServer.cast(:our_game, {:register, user})
-  end
 
   # DELETE THIS
   def get_messages do
@@ -17,10 +13,6 @@ defmodule Hangman.Room do
 
   def init(_) do
     {:ok, %{}}
-  end
-
-  def handle_cast({:register, user}, state) do
-    {:noreply, Map.put(state, user, 0)} # 0 means zero wins in the game
   end
 
   # DELETE THIS
