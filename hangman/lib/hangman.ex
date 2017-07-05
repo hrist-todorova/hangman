@@ -16,9 +16,20 @@ defmodule Hangman do
     :world
   end
 
-  def add_player(name) do
-    Hangman.Room.register(name)
+  def register(name, password) do
+    :ets.insert(:users, {name, Player.new(name, password)})
   end
+
+  def user_info(name) do
+    :ets.lookup(:users, name)
+  end
+
+  
+  
+
+
+
+
 
   
 end

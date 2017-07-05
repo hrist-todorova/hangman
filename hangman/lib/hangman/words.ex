@@ -5,25 +5,24 @@ defmodule Hangman.Words do
     GenServer.start_link(__MODULE__, [], name: :words)
   end
 
-  def add_word(word) when is_bitstring(word) do
-    GenServer.cast(:words, {:add, word})
+  def add_word(word, user) when is_bitstring(word) do
+    GenServer.cast(:words, {:add, word, user})
   end
 
-  # DELETE THIS
-  def get_messages do
-    GenServer.call(:words, :get_messages)
+  def get_all_words(player) do
+    GenServer.call(:words, {:get_words, player})
   end
 
   def init(_) do
-    {:ok, []}
+    {:ok, %{}} # FORMAT: word => user
   end
 
-  def handle_cast({:add, word}, state) do
-    {:noreply, Enum.uniq([word | state])}
+  def handle_cast({:add, word, user}, state) do
+    {:noreply, Map.put_new(state, word, user)}
   end
 
-  # DELETE THIS
-  def handle_call(:get_messages, _from, messages) do
+  def handle_call({:get_words, player}, _from, messages) do
+    # да добавя да не може да изберем дума, която ние сме вкарали
     {:reply, messages, messages}
   end
 
