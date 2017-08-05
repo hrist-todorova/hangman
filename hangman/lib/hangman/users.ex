@@ -6,7 +6,7 @@ defmodule Hangman.Users do
   """
 
   def start_link do
-    GenServer.start_link(__MODULE__, [], name: :api)
+    GenServer.start_link(__MODULE__, [], name: :users)
   end
 
   @doc """
@@ -15,7 +15,7 @@ defmodule Hangman.Users do
   """
 
   def register(user, password) when is_bitstring(user) and is_bitstring(password) do
-    GenServer.call(:api, {:register, user, password})
+    GenServer.call(:users, {:register, user, password})
   end
 
   @doc """
@@ -23,7 +23,7 @@ defmodule Hangman.Users do
     "The username or password is wrong"
   """
   def login(user, password) when is_bitstring(user) and is_bitstring(password) do
-    GenServer.call(:api, {:login, user, password})
+    GenServer.call(:users, {:login, user, password})
   end
 
   def init(_) do

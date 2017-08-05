@@ -2,16 +2,20 @@ defmodule Hangman.Users.Parser do
   @data_file_path "data/user_data.txt"
 
   @moduledoc """
-    This module reads saved information about all users and returns it to the Genserver when needed
+    This module reads and writes information about the users
   """
 
- @doc """
+  @doc """
     Returns array of elements of type `Player`
   """
   def parse_data do
     data = File.read!(@data_file_path) |> String.split("\r")
     Enum.map(data, fn(x) -> Player.login(x) end)
   end
+
+  @doc """
+    Inserts a new player in the database
+  """
 
   def add_player(name, password) do
     {:ok, file} = File.open(@data_file_path, [:write, :append])
