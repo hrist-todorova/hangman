@@ -9,8 +9,14 @@ defmodule Hangman.Users.Parser do
     Returns array of elements of type `Player`
   """
   def parse_data do
-    data = File.read!(@data_file_path) |> String.split("\n")
-    Enum.map(data, fn(x) -> String.trim(x, "\r") |> Player.login end)
+    data = File.read!(@data_file_path) |> String.split("\r")
+    Enum.map(data, fn(x) -> Player.login(x) end)
+  end
+
+  def add_player(name, password) do
+    {:ok, file} = File.open(@data_file_path, [:write, :append])
+    IO.write file, "#{name} #{password} 0 0 \r"
+    File.close(file)
   end
 
 end

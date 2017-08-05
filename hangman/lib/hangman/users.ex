@@ -9,9 +9,13 @@ defmodule Hangman.Users do
     GenServer.start_link(__MODULE__, [], name: :api)
   end
 
+  @doc """
+    Returns an object Player with the same password and username. If it's in the database already we get the message:
+    "You can't register with these username and password"
+  """
+
   def register(user, password) when is_bitstring(user) and is_bitstring(password) do
-    # if already exists show some stuff
-    GenServer.cast(:api, {:register, user, password})
+    GenServer.call(:api, {:register, user, password})
   end
 
   @doc """
@@ -21,32 +25,19 @@ defmodule Hangman.Users do
   def login(user, password) when is_bitstring(user) and is_bitstring(password) do
     GenServer.call(:api, {:login, user, password})
   end
-  
-
-
-
-
-
-
-
-
-
-
-  def get_user(name) do
-    #GenServer.call(:api, {:get, name})
-  end
-
-
-  def state do
-    #GenServer.call(:api, :state)
-  end
 
   def init(_) do
     {:ok, Hangman.Users.Parser.parse_data}
   end
 
-  def handle_cast({:register, user, password}, state) do
-    #{:noreply, Map.put_new(state, user, Player.new(user, password))}
+  def handle_call({:register, user, password}, _from, state) do
+    index = Enum.find_index(state, fn(x) -> Player.name(x) == user and Player.password(x) == password end)
+    if index == nil do
+      Hangman.Users.Parser.add_player(user, password)
+      {:reply, Player.new(user, password), [ Player.new(user, password) | state ]}
+    else
+      {:reply, "You can't register with these username and password", state}
+    end
   end
 
   def handle_call({:login, user, password}, _from, state) do
@@ -57,14 +48,6 @@ defmodule Hangman.Users do
     else
       {:reply, "The username or password is wrong", state}
     end
-  end
-  
-  def handle_call(:state, _from, state) do 
-    #{:reply, state, state}
-  end
-  def handle_call({:get, name}, _from, state) do
-    #{:ok, user} = Map.fetch(state, name)
-    #{:reply, user, state}
   end
 
 end
