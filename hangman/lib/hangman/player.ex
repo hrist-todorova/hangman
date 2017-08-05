@@ -1,7 +1,25 @@
 defmodule Player do
-  defstruct [nickname: "", wins: 0, total_games: 0, pass: "", guessed_words: []]
+  defstruct [nickname: "", pass: "", wins: 0, total_games: 0]
+
+  def login(string) do
+    data = String.split(string)
+    %Player{nickname: Enum.at(data, 0), pass: Enum.at(data, 1), wins: Enum.at(data, 2), total_games: Enum.at(data,3)}
+  end
 
   def new(name, password), do: %Player{nickname: name, pass: password}
+
+  def copy(other) do
+    %Player{nickname: other.nickname, pass: other.pass, wins: other.wins, 
+      total_games: other.total_games}
+  end
+
+  def name(player) do
+    player.nickname
+  end
+
+  def password(player) do
+    player.pass
+  end
 
   def add_word(word, player) do
     Hangman.Words.add_word(word, player)
@@ -13,7 +31,7 @@ defmodule Player do
   end
 
   defp get_word(player) do
-    List.first(Hangman.Words.get_all_words(player) -- player.guessed_words)
+    List.first(Hangman.Words.get_all_words(player))
   end
     
 end

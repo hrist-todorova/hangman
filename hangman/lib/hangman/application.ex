@@ -1,20 +1,20 @@
 defmodule Hangman.Application do
-  # See http://elixir-lang.org/docs/stable/elixir/Application.html
-  # for more information on OTP Applications
-  @moduledoc false
-
   use Application
+
+  @moduledoc """
+    Starts the application
+  """
 
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
 
   #  :ets.new(:words, [:named_table, :public])
-    :ets.new(:users, [:named_table, :public])
+  #  :ets.new(:users, [:named_table, :public])
 
     children = [
-     worker(Hangman.Room, []),
-     worker(Hangman.Words, []),
-     worker(Hangman.Users, [])
+      worker(Hangman.Users, [])
+      #worker(Hangman.Room, []),
+      #worker(Hangman.Words, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

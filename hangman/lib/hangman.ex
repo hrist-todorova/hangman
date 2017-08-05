@@ -17,12 +17,13 @@ defmodule Hangman do
   end
 
   def register(name, password) do
-    :ets.insert(:users, {name, Player.new(name, password)})
+    Hangman.Users.register(name, password)
   end
 
-  def user_info(name) do
-    :ets.lookup(:users, name)
+  def get_user(name) do   
+    Hangman.Users.get_user(name)
   end
+
 
   
   
