@@ -10,8 +10,8 @@ defmodule Hangman.Application do
     
     children = [
       worker(Hangman.Users, []),
-      worker(Hangman.Words, [])
-      #worker(Hangman.Room, []),
+      worker(Hangman.Words, []),
+      worker(Hangman.Rooms, [])
     ]
 
     opts = [strategy: :one_for_one, name: Hangman.Supervisor]

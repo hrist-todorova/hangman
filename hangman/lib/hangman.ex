@@ -24,6 +24,18 @@ defmodule Hangman do
     Hangman.Users.login(name, password)
   end
 
+  def add_word(word) do
+    Hangman.Words.add_word(word)
+  end
+
+  def create_room(name) when is_bitstring(name) do
+    Hangman.Rooms.add_new_room(name)
+  end
+
+  def enter_room(player, name) when is_bitstring(name) do
+    Hangman.Rooms.insert_a_player(player, name)
+  end
+  
   
 
 

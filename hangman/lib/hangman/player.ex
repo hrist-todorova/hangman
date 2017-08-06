@@ -8,11 +8,6 @@ defmodule Player do
 
   def new(name, password), do: %Player{nickname: name, pass: password}
 
-  def copy(other) do
-    %Player{nickname: other.nickname, pass: other.pass, wins: other.wins, 
-      total_games: other.total_games}
-  end
-
   def name(player) do
     player.nickname
   end
@@ -20,6 +15,31 @@ defmodule Player do
   def password(player) do
     player.pass
   end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  def copy(other) do
+    %Player{nickname: other.nickname, pass: other.pass, wins: other.wins, 
+      total_games: other.total_games}
+  end
+
+  
 
   def add_word(word, player) do
     Hangman.Words.add_word(word)
