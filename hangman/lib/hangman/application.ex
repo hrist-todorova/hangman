@@ -7,10 +7,7 @@ defmodule Hangman.Application do
 
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
-
-  #  :ets.new(:words, [:named_table, :public])
-  #  :ets.new(:users, [:named_table, :public])
-
+    
     children = [
       worker(Hangman.Users, [])
       #worker(Hangman.Room, []),
