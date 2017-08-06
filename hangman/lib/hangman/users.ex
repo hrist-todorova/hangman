@@ -2,7 +2,7 @@ defmodule Hangman.Users do
   use GenServer
 
   @moduledoc """
-    This is the API of the application
+  This is the API of the application
   """
 
   def start_link do
@@ -10,8 +10,8 @@ defmodule Hangman.Users do
   end
 
   @doc """
-    Returns an object Player with the same password and username. If it's in the database already we get the message:
-    "You can't register with these username and password"
+  Returns an object Player with the same password and username. If it's in the database already we get the message:
+  "You can't register with these username and password"
   """
 
   def register(user, password) when is_bitstring(user) and is_bitstring(password) do
@@ -19,8 +19,8 @@ defmodule Hangman.Users do
   end
 
   @doc """
-    Returns an object Player with the same password and username. If it's not in the database we get the message:
-    "The username or password is wrong"
+  Returns an object Player with the same password and username. If it's not in the database we get the message:
+  "The username or password is wrong"
   """
   def login(user, password) when is_bitstring(user) and is_bitstring(password) do
     GenServer.call(:users, {:login, user, password})

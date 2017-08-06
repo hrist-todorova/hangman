@@ -2,11 +2,11 @@ defmodule Hangman.Users.Parser do
   @data_file_path "data/user_data.txt"
 
   @moduledoc """
-    This module reads and writes information about the users
+  This module reads and writes information about the users
   """
 
   @doc """
-    Returns array of elements of type `Player`
+  Returns array of elements of type `Player`
   """
   def parse_data do
     data = File.read!(@data_file_path) |> String.split("\r")
@@ -14,7 +14,7 @@ defmodule Hangman.Users.Parser do
   end
 
   @doc """
-    Inserts a new player in the database
+  Inserts a new player in the database
   """
 
   def add_player(name, password) do
