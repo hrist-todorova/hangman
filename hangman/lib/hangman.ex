@@ -20,9 +20,11 @@ defmodule Hangman do
     Hangman.Users.register(name, password)
   end
 
-  def get_user(name) do   
-    Hangman.Users.get_user(name)
+  def login(name, password) do
+    Hangman.Users.login(name, password)
   end
+
+  
 
 
   
