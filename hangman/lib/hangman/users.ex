@@ -2,7 +2,7 @@ defmodule Hangman.Users do
   use GenServer
 
   @moduledoc """
-  This is the API of the application
+  This is the server containing the users
   """
 
   def start_link do

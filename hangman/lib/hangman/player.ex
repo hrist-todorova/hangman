@@ -22,7 +22,7 @@ defmodule Player do
   end
 
   def add_word(word, player) do
-    Hangman.Words.add_word(word, player)
+    Hangman.Words.add_word(word)
   end
 
   def guess_word(player) do
@@ -31,7 +31,7 @@ defmodule Player do
   end
 
   defp get_word(player) do
-    List.first(Hangman.Words.get_all_words(player))
+    Hangman.Words.get_a_word
   end
     
 end
