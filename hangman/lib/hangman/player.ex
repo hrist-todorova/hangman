@@ -4,6 +4,8 @@ defmodule Player do
   def login(string) do
     data = String.split(string)
     %Player{nickname: Enum.at(data, 0), pass: Enum.at(data, 1), wins: Enum.at(data, 2), total_games: Enum.at(data,3)}
+
+    #to-do convert wins and total games to integers!!!
   end
 
   def new(name, password), do: %Player{nickname: name, pass: password}
@@ -47,7 +49,7 @@ defmodule Player do
 
   def guess_word(player) do
     word = get_word(player)
-    Game.new(word)
+   # Game.new(word)
   end
 
   defp get_word(player) do

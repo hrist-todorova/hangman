@@ -1,8 +1,9 @@
 defmodule Game do
-  defstruct [word: [], fails: 0, visualization: [], wrong_letters: []]
+  defstruct [word: [], fails: 0, visualization: [], wrong_letters: [], player: Room.Player.new, room: ""]
 
-  def new(new_word) do
-    %Game{word: String.codepoints(new_word), visualization: List.duplicate("*", String.length(new_word))}
+  def new(new_word, player, room_name) do
+    %Game{word: String.codepoints(new_word), visualization: List.duplicate("*", String.length(new_word)),
+          room: room_name, player: Room.Player.new(player)}
   end
 
   def visualize(game) do
@@ -17,22 +18,24 @@ defmodule Game do
     change_state(game, Enum.member?(game.word, letter), letter)
   end
 
-  def change_state(%Game{fails: 7}, false, _), do: %Game{word: "Game Over"}
-  # to-do: if we repeat wrong letter => dont add it to fails
-  # aslo  some action when we win
-  def change_state(game, false, letter), do: %{game | fails: game.fails + 1, wrong_letters: [letter] ++ game.wrong_letters}
   def change_state(game, true, letter) do
     visual = find_index(game.visualization, game.word, letter, 0)
     if visual == game.word do
-      %Game{word: "You won"}
+      %{game.player | wins: game.player.wins + 1}
     else
       %{game | visualization: visual}
     end
   end
-
-
-
-
+  def change_state(%Game{fails: 7, player: p}, false, _) do
+    %{p | lost_games: p.lost_games + 1}
+  end
+  def change_state(game, false, letter) do
+    if Enum.member?(game.wrong_letters, letter) do
+      game
+    else
+      %{game | fails: game.fails + 1, wrong_letters: [letter] ++ game.wrong_letters}
+    end
+  end
 
   defp find_index(_, [], _, _), do: []
   defp find_index(visual, list, letter, index) do
