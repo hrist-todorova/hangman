@@ -35,6 +35,10 @@ defmodule Hangman do
   def enter_room(player, name) when is_bitstring(name) do
     Hangman.Rooms.insert_a_player(player, name)
   end
+
+  def start_game(player, room) do
+    Game.new(Hangman.Words.get_a_word, player, room.name)
+  end
   
   
 
