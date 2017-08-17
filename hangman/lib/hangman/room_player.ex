@@ -1,6 +1,6 @@
 defmodule Room.Player do
-  defstruct [nickname: "", wins: 0]
+  defstruct [nickname: "", pass: "", wins: 0]
 
-  def new(name), do: %Room.Player{nickname: name}
+  def new(player), do: %Room.Player{nickname: Player.name(player), pass: Player.password(player)}
     
 end

@@ -1,6 +1,8 @@
 defmodule Hangman.Rooms do
   use GenServer
 
+  #TO DO: MAKE DATABASE BRUH
+
   @moduledoc """
   This is the server containing game rooms
   """
@@ -16,6 +18,10 @@ defmodule Hangman.Rooms do
   def add_new_room(name) do
     GenServer.call(:rooms, {:add, name})
   end
+
+  @doc """
+  Returns an object `Room` with the given player inserted in it. If this room doesn't exist we get the message: "There is not such room"
+  """
 
   def insert_a_player(player, name) do
     GenServer.call(:rooms, {:insert, player, name})
