@@ -3,7 +3,7 @@ defmodule Game do
 	This module defines a game in a gameroom
 	"""
 
-	defstruct [word: [], fails: 0, visualization: [], wrong_letters: [], player: Room.Player.new, room: ""]
+	defstruct [word: [], fails: 0, visualization: [], wrong_letters: [], player: %{}, room: ""]
 
 	@doc """
 	Create a new game by giving the word, which has to be guessed, the player object and the name of the room we are playing in
@@ -11,7 +11,7 @@ defmodule Game do
 
 	def new(new_word, player, room_name) do
 		%Game{word: String.codepoints(new_word), visualization: List.duplicate("*", String.length(new_word)),
-					room: room_name, player: Room.Player.new(player)}
+					room: room_name, player:  %{}}
 	end
 
 	@doc """

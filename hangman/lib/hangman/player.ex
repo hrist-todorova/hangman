@@ -17,43 +17,5 @@ defmodule Player do
   def password(player) do
     player.password
   end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  def copy(other) do
-    %Player{username: other.username, password: other.password, wins: other.wins, 
-      total: other.total}
-  end
-
-  
-
-  def add_word(word, player) do
-    Hangman.Words.add_word(word)
-  end
-
-  def guess_word(player) do
-    word = get_word(player)
-   # Game.new(word)
-  end
-
-  defp get_word(player) do
-    Hangman.Words.get_a_word
-  end
     
 end
