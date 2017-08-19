@@ -5,9 +5,17 @@ defmodule Hangman.Words.Queries do
     Database.Repo.insert(%Database.Word{word: "#{new_word}", user: "#{user}"})
 	end
 	
-	def get_a_word(for_user) do
+	def get_a_word(not_from_user) do
 		"words" 
-		|> where([u], u.user != ^for_user)
+		|> where([u], u.user != ^not_from_user)
+		|> select([:word]) 
+		|> Database.Repo.all
+		|> Enum.random
+	end
+
+	def get_a_word_from_a_friend(friend_name) do
+		"words" 
+		|> where([u], u.user == ^friend_name)
 		|> select([:word]) 
 		|> Database.Repo.all
 		|> Enum.random
