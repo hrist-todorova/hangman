@@ -5,7 +5,7 @@ defmodule Hangman.Rooms.Queries do
 		Database.Repo.insert(%Database.Room{name: "#{room_name}", username: "#{user}", wins: 0})
 	end
 	
-	def print_all_rooms do
+	def get_all_rooms_names do
 		"rooms"
 		|> select([:name])
 		|> Database.Repo.all

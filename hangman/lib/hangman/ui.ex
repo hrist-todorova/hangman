@@ -20,18 +20,12 @@ defmodule Hangman.UI do
     Hangman.Users.login(name, password)
   end
 
-
-
   def add_word(new_word, user) do
     Hangman.Words.Queries.add_word(new_word, user)
   end
 
-  def create_room(name) when is_bitstring(name) do
-    Hangman.Rooms.add_new_room(name)
-  end
-
   def enter_room(player, name) when is_bitstring(name) do
-    Hangman.Rooms.insert_a_player(player, name)
+    Hangman.Rooms.Queries.add_user_to_room(name, player.name)
   end
 
   def start_game(player, room) do
