@@ -14,7 +14,7 @@ defmodule Hangman.Users do
   "You can't register with these username and password"
   """
 
-  def register(user, password) when is_bitstring(user) and is_bitstring(password) do
+  def register(user, password) do
     GenServer.call(:users, {:register, user, password})
   end
 
@@ -22,18 +22,18 @@ defmodule Hangman.Users do
   Returns an object Player with the same password and username. If it's not in the database we get the message:
   "The username or password is wrong"
   """
-  def login(user, password) when is_bitstring(user) and is_bitstring(password) do
+  def login(user, password) do
     GenServer.call(:users, {:login, user, password})
   end
 
   def init(_) do
-    {:ok, Hangman.Users.Parser.parse_data}
+    {:ok, Hangman.Users.Queries.all_users}
   end
 
   def handle_call({:register, user, password}, _from, state) do
     index = Enum.find_index(state, fn(x) -> Player.name(x) == user and Player.password(x) == password end)
     if index == nil do
-      Hangman.Users.Parser.add_player(user, password)
+      Hangman.Users.Queries.add_player(user, password)
       {:reply, Player.new(user, password), [ Player.new(user, password) | state ]}
     else
       {:reply, "You can't register with these username and password", state}

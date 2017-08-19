@@ -1,10 +1,11 @@
 defmodule Database.User do
-    use Ecto.Schema
+  use Ecto.Schema
   
-    schema "users" do
-      field :username, :string
-      field :password, :string
-      field :wins, :integer
-      field :total, :integer
-    end
+  schema "users" do
+    field :username, :string
+    field :password, :string
+    field :wins, :integer
+    field :total, :integer
   end
+  
+end

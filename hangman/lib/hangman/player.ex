@@ -1,21 +1,21 @@
 defmodule Player do
-  defstruct [nickname: "", pass: "", wins: 0, total_games: 0]
+  defstruct [username: "", password: "", wins: 0, total: 0]
 
-  def login(string) do
-    data = String.split(string)
-    %Player{nickname: Enum.at(data, 0), pass: Enum.at(data, 1), wins: Enum.at(data, 2), total_games: Enum.at(data,3)}
-
-    #to-do convert wins and total games to integers!!!
+  def login(%{password: pass, total: nil, username: name, wins: nil}) do
+    %Player{username: name, password: pass}
+  end
+  def login(%{password: pass, total: total_games, username: name, wins: wins_count}) do
+    %Player{username: name, password: pass, wins: wins_count, total: total_games}
   end
 
-  def new(name, password), do: %Player{nickname: name, pass: password}
+  def new(name, password), do: %Player{username: name, password: password}
 
   def name(player) do
-    player.nickname
+    player.username
   end
 
   def password(player) do
-    player.pass
+    player.password
   end
 
 
@@ -37,8 +37,8 @@ defmodule Player do
   
 
   def copy(other) do
-    %Player{nickname: other.nickname, pass: other.pass, wins: other.wins, 
-      total_games: other.total_games}
+    %Player{username: other.username, password: other.password, wins: other.wins, 
+      total: other.total}
   end
 
   
