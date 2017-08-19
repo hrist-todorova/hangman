@@ -1,8 +1,6 @@
 defmodule Hangman.Medium do
 	use GenServer
 
-	alias Gamer
-
 	def start_link do
 		GenServer.start_link(__MODULE__, %Game{}, name: :medium)
 	end
