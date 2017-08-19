@@ -42,14 +42,14 @@ defmodule Game do
 	def change_state(game, true, letter) do
 		visual = find_index(game.visualization, game.word, letter, 0)
 		if visual == game.word do
-			%{game.player | wins: game.player.wins + 1}
+			:win
 		else
 			%{game | visualization: visual}
 		end
 	end
 
 	def change_state(%Game{fails: 7, player: p}, false, _) do
-		%{p | lost_games: p.lost_games + 1}
+		:fail
 	end
 
 	def change_state(game, false, letter) do

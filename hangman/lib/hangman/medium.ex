@@ -1,9 +1,10 @@
 defmodule Hangman.Medium do
 	use GenServer
 
+	alias Gamer
+
 	def start_link do
 		GenServer.start_link(__MODULE__, %Game{}, name: :medium)
-
 	end
 	
 	def init(_) do
@@ -15,6 +16,7 @@ defmodule Hangman.Medium do
 		room = IO.gets "In which room you would like to play? If you want to create a new one please type e non-existing name."
 		Hangman.Rooms.Queries.add_user_to_room(String.trim(room), String.trim(name))
 		add_words(name)
+		#if there is a game in progress add it, not a new one
 		{:ok, Game.new( Hangman.Words.Queries.get_a_word(name), name, room)}
 	end
 
@@ -68,5 +70,23 @@ defmodule Hangman.Medium do
 				IO.puts "Good luck!\n"
 		end
 	end
+
+	def guess_letter(letter) do
+		GenServer.call(:medium, {:guess_letter, letter})
+	end
+
+	def handle_call({:guess_letter, letter}, _from, state) do
+		#game = Game.guess_letter(state, letter)
+		#case game do
+		#	:win ->
+		#		{:reply, , state}
+		#	:fail ->
+		#		{:reply, , state}
+		#	_ ->
+		#		{:reply, , game}
+		end
+	end
 	
+
+
 end
