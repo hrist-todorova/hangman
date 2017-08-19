@@ -1,12 +1,26 @@
 defmodule Hangman.UI do
 
+  @moduledoc """
+  This module provides all functions which will be available to a user
+  """
+
+  @doc """
+  Register user in the game, returns new user object
+  """
+
   def register(name, password) do
     Hangman.Users.register(name, password)
   end
 
+  @doc """
+  Logging in the game, returns user object which was previously created
+  """
+
   def login(name, password) do
     Hangman.Users.login(name, password)
   end
+
+
 
   def add_word(word) do
     Hangman.Words.add_word(word)
