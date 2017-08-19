@@ -9,6 +9,7 @@ defmodule Hangman.Application do
     import Supervisor.Spec, warn: false
     
     children = [
+      supervisor(Users.Repo, []),
       worker(Hangman.Users, []),
       worker(Hangman.Words, []),
       worker(Hangman.Rooms, [])
