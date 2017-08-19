@@ -16,7 +16,7 @@ defmodule Hangman.Mixfile do
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
     [extra_applications: [:logger],
-     mod: {Hangman.Application, []}]
+     mod: {Hangman, []}]
   end
 
   # Dependencies can be Hex packages:
