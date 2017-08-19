@@ -22,8 +22,8 @@ defmodule Hangman.UI do
 
 
 
-  def add_word(word) do
-    Hangman.Words.add_word(word)
+  def add_word(new_word, user) do
+    Hangman.Words.Queries.add_word(new_word, user)
   end
 
   def create_room(name) when is_bitstring(name) do
@@ -35,7 +35,7 @@ defmodule Hangman.UI do
   end
 
   def start_game(player, room) do
-    Game.new(Hangman.Words.get_a_word, player, room.name)
+    Game.new(Hangman.Words.Queries.get_a_word(player.name)[:word], player, room.name)
   end
 
 end
