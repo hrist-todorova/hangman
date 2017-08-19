@@ -10,7 +10,6 @@ defmodule Hangman do
     children = [
       supervisor(Database.Repo, []),
       worker(Hangman.Users, []),
-      worker(Hangman.Words, []),
       worker(Hangman.Rooms, [])
     ]
 

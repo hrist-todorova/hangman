@@ -31,12 +31,12 @@ defmodule Hangman.Users do
   end
 
   def handle_call({:register, user, password}, _from, state) do
-    index = Enum.find_index(state, fn(x) -> Player.name(x) == user and Player.password(x) == password end)
+    index = Enum.find_index(state, fn(x) -> Player.name(x) == user end)
     if index == nil do
       Hangman.Users.Queries.add_player(user, password)
       {:reply, Player.new(user, password), [ Player.new(user, password) | state ]}
     else
-      {:reply, "You can't register with these username and password", state}
+      {:reply, "You can't register with this username", state}
     end
   end
 
