@@ -10,8 +10,12 @@ defmodule Hangman.Medium do
 		name = IO.gets "Hello stranger!\nWhat's your name? "
 		registered = IO.gets "Have you played this game before? Please answer with yes or no. "
 		enter(registered, name)
-
-		{:ok, %Game{}}
+		IO.puts "CURRENT ROOMS IN THE GAME"
+		IO.inspect Hangman.Rooms.Queries.get_all_rooms_names
+		room = IO.gets "In which room you would like to play? If you want to create a new one please type e non-existing name."
+		Hangman.Rooms.Queries.add_user_to_room(String.trim(room), String.trim(name))
+		add_words(name)
+		{:ok, Game.new( Hangman.Words.Queries.get_a_word(name), name, room)}
 	end
 
 	defp enter(bool, name) do
@@ -51,6 +55,18 @@ defmodule Hangman.Medium do
 		IO.puts "Please tell me again: "
 		bool = IO.gets "Have you played this game before? Please answer with yes or no."
 		enter(bool, name)
+	end
+
+	defp add_words(name) do
+		bool = IO.gets "Do you want to add a word to the game? "
+		case bool do
+			"yes\n" ->
+				word = IO.gets "Word: "
+				Hangman.Words.Queries.add_word(word, String.trim(name))
+				add_words(name)
+			_ ->
+				IO.puts "Good luck!\n"
+		end
 	end
 	
 end

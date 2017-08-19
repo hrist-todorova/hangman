@@ -10,6 +10,7 @@ defmodule Hangman.Rooms.Queries do
 		|> select([:name])
 		|> Database.Repo.all
 		|> Enum.uniq
+		|> Enum.map(fn(x) -> x.name end)
 	end
 
 end

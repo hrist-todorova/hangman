@@ -13,12 +13,4 @@ defmodule Hangman.Words.Queries do
 		|> Enum.random
 	end
 
-	def get_a_word_from_a_friend(friend_name) do
-		"words" 
-		|> where([u], u.user == ^friend_name)
-		|> select([:word]) 
-		|> Database.Repo.all
-		|> Enum.random
-	end
-
 end

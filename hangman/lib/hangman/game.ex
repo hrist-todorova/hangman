@@ -10,8 +10,9 @@ defmodule Game do
 	"""
 
 	def new(new_word, player, room_name) do
-		%Game{word: String.codepoints(new_word), visualization: List.duplicate("*", String.length(new_word)),
-					room: room_name, player:  %{}}
+		#%Game{word: String.codepoints(new_word), visualization: List.duplicate("*", String.length(new_word)),
+		#			room: room_name, player:  %{}}
+		%Game{}
 	end
 
 	@doc """
