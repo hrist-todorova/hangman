@@ -10,12 +10,13 @@ defmodule Hangman do
 
 		children = [
 			supervisor(Database.Repo, []),
-			worker(Hangman.Users, [])
+			worker(Hangman.Users, []),
+			worker(Hangman.Medium, [])
 		]
 
 		opts = [strategy: :one_for_one, name: Hangman.Supervisor]
 		Supervisor.start_link(children, opts)
-		
+
 	end
 
 end

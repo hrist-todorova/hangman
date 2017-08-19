@@ -34,19 +34,18 @@ defmodule Hangman.Users do
     index = Enum.find_index(state, fn(x) -> Player.name(x) == user end)
     if index == nil do
       Hangman.Users.Queries.add_player(user, password)
-      {:reply, Player.new(user, password), [ Player.new(user, password) | state ]}
+      {:reply, :ok, [ Player.new(user, password) | state ]}
     else
-      {:reply, "You can't register with this username", state}
+      {:reply, :error, state}
     end
   end
 
   def handle_call({:login, user, password}, _from, state) do
     index = Enum.find_index(state, fn(x) -> Player.name(x) == user and Player.password(x) == password end)
     if index != nil do
-      {:ok, user} = Enum.fetch(state, index)
-      {:reply, user, state}
+      {:reply, :ok, state}
     else
-      {:reply, "The username or password is wrong", state}
+      {:reply, :error, state}
     end
   end
 
