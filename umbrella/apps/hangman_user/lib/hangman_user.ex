@@ -1,4 +1,5 @@
 defmodule HangmanUser do
+
   @moduledoc """
   Documentation for HangmanUser.
   """
