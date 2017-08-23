@@ -7,8 +7,8 @@ defmodule Data.User.Queries do
     |> Data.Repo.all
 	end
 	
-  def add_player(name, pass) do
-    Data.Repo.insert(%Data.User{username: "#{name}", password: "#{pass}", wins: 0, total: 0})
+  def add_player(username, password) do
+    Data.Repo.insert(%Data.User{username: "#{username}", password: "#{password}", wins: 0, total: 0})
   end
 
 end
