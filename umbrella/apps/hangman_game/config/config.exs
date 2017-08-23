@@ -2,14 +2,14 @@
 # and its dependencies with the aid of the Mix.Config module.
 use Mix.Config
 
-config :hangman_game, Users.Repo,
+config :hangman_game, Data.Repo,
   adapter: Ecto.Adapters.Postgres,
   database: "hangman_game_repo",
   username: "postgres",
   password: "951006",
   hostname: "localhost"
 
-config :hangman_game, ecto_repos: [Users.Repo]
+config :hangman_game, ecto_repos: [Data.Repo]
 
 
 # This configuration is loaded before any dependency and is restricted

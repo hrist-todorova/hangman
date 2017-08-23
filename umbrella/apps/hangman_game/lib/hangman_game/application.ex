@@ -12,7 +12,8 @@ defmodule HangmanGame.Application do
     children = [
       # Starts a worker by calling: HangmanGame.Worker.start_link(arg1, arg2, arg3)
       # worker(HangmanGame.Worker, [arg1, arg2, arg3]),
-      supervisor(Users.Repo, [])
+      supervisor(Data.Repo, []),
+      worker(HangmanGame.Server, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

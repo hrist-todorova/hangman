@@ -1,7 +1,7 @@
-defmodule Users.User do
+defmodule Data.User do
   use Ecto.Schema
-
-  schema "people" do
+  
+  schema "users" do
     field :username, :string
     field :password, :string
     field :wins, :integer
