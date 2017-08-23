@@ -22,8 +22,6 @@ defmodule Hangman do
 	#TO-DO's
 	# tests
 	# full documentation
-	# user as otp applications?
-	# users on different nodes
 	# number of people in each room
 	# leaderboard on demand top 10 + our score
 	# what happens if we kill this and that
