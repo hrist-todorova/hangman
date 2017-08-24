@@ -7,5 +7,13 @@ defmodule HangmanUser.Interface do
   def login(username, password) do
     HangmanGame.Server.login(username, password)
   end
+
+  def create_room(name) do
+    
+  end
+
+  def enter_room(name) do
+    
+  end
   
 end
