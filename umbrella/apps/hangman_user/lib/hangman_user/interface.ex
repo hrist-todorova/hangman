@@ -8,12 +8,16 @@ defmodule HangmanUser.Interface do
     HangmanGame.Server.login(username, password)
   end
 
-  def create_room(name) do
+  def create_room(roomname, username) do
+    Data.Room.Queries.add_user_to_room(roomname, username)
+  end
+
+  def enter_room(roomname, username) do
     
   end
 
-  def enter_room(name) do
-    
+  def add_word(word, username, roomname) do
+    Data.Word.Queries.add_word(word, username, roomname)
   end
   
 end

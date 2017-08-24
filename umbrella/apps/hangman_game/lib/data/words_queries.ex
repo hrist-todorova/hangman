@@ -2,7 +2,16 @@ defmodule Data.Word.Queries do
   import Ecto.Query
 
   def add_word(word, username, roomname) do
-    Data.Repo.insert(%Data.Word{word: "#{word}", username: "#{username}", roomname: "#{roomname}"})
+    exists = "words"
+             |> where([u], u.word == ^word and u.roomname == ^roomname)
+             |> select([:word])
+             |> Data.Repo.all
+    if exists == [] do
+      Data.Repo.insert(%Data.Word{word: "#{word}", username: "#{username}", roomname: "#{roomname}"})
+      :ok
+    else
+      :error
+    end
   end
 
   def get_a_word(not_from_user, roomname) do
