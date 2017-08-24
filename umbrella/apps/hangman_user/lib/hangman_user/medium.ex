@@ -4,7 +4,20 @@ defmodule HangmanUser.Medium do
     username = IO.gets "Hello stranger!\nWhat's your name? "
     registered = IO.gets "Have you played this game before? Please answer with yes or no. "
     user = enter(registered, username)
+    IO.puts "I see that you are ready to play! "
+    rooms = IO.gets "Do you want to create a new room? If you don't I'll show you the existing ones. Please answer with yes or no."
+    new_room(rooms)
     user
+  end
+
+  defp new_room(bool) do
+    case bool do
+      "yes\n" ->
+      
+      "no\n" ->
+
+      _ ->
+    end
   end
 
   defp enter(bool, username) do
