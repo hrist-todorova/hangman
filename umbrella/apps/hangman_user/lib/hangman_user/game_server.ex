@@ -47,5 +47,4 @@ defmodule HangmanUser.Game.Server do
     end
   end
   
-
 end

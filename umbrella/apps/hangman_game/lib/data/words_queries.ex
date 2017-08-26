@@ -21,7 +21,7 @@ defmodule Data.Word.Queries do
             |> Data.Repo.all
     
     if words == [] do
-      "hangman"
+      %{word: "hangman"} 
     else
       Enum.random(words)
     end
