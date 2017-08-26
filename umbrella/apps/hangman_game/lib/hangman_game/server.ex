@@ -9,10 +9,16 @@ defmodule HangmanGame.Server do
     GenServer.start_link(__MODULE__, [], name: :users)
   end
 
+  @doc """
+  This function returns registers a new player in the game. When this is succesful it returns :ok. When there is somebody with the same username it returns :error.
+  """
   def register(username, password) do
     GenServer.call(:users, {:register, username, password})
   end
 
+  @doc """
+  This function logs the user in the database. It returns :error if we choose a wrong password or non-existing username. Otherwise it returns :ok.
+  """
   def login(username, password) do
     GenServer.call(:users, {:login, username, password})
   end
