@@ -5,6 +5,13 @@ defmodule Data.Room.Queries do
     Data.Repo.insert(%Data.Room{roomname: "#{roomname}" ,username: "#{username}", wins: 0})
   end
 
+  def login(roomname, username) do
+    wins = "rooms"
+           |> where([u], u.roomname == ^roomname and u.username == ^username)
+           |> select([:wins])
+           |> Data.Repo.all
+  end
+
   def get_all_room_names do
     "rooms"
     |> select([:roomname])
