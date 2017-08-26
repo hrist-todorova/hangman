@@ -21,7 +21,7 @@ defmodule Data.Word.Queries do
             |> Data.Repo.all
     
     if words == [] do
-      %{word: :error} #THIS MEANS THAT YOU ARE THE ONLY PLAYER IN THE ROOM BRUH
+      %{word: :error} #THIS MEANS THAT YOU ARE THE ONLY PLAYER IN THE ROOM BRUH BRUUUUUUUUUUUUUUH
     else
       Enum.random(words)
     end

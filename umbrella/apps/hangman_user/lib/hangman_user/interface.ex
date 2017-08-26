@@ -19,9 +19,5 @@ defmodule HangmanUser.Interface do
   def add_word(word, username, roomname) do
     Data.Word.Queries.add_word(word, username, roomname)
   end
-
-  def show_rooms do
-    Data.Rooom.Queries.get_all_room_names
-  end
   
 end

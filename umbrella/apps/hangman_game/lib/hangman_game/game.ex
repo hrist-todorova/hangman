@@ -1,7 +1,7 @@
 defmodule Game do
   defstruct [word: [], fails: 0, visualization: [], wrong_letters: [], player: "", room: ""]
 
-  def new(username, roomname) do
+  def new(%{username: username, roomname: roomname}) do
     %{word: word} = Data.Word.Queries.get_a_word(username, roomname) 
     %Game{player: "#{username}", room: "#{roomname}", word: String.codepoints(word), 
           visualization: List.duplicate("*", String.length(word))}
