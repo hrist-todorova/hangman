@@ -1,6 +1,8 @@
 defmodule Data.User do
   use Ecto.Schema
   
+  @moduledoc false
+
   schema "users" do
     field :username, :string
     field :password, :string
