@@ -11,6 +11,7 @@ config :hangman_game, Data.Repo,
 
 config :hangman_game, ecto_repos: [Data.Repo]
 
+config :logger, level: :info
 
 # This configuration is loaded before any dependency and is restricted
 # to this project. If another project depends on this project, this

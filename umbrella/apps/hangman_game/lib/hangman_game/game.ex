@@ -1,4 +1,8 @@
 defmodule Game do
+  @moduledoc """
+  This module represent game functionality
+  """
+
   defstruct [word: [], fails: 0, visualization: [], wrong_letters: [], player: "", room: ""]
 
   def new(%{username: username, roomname: roomname}) do

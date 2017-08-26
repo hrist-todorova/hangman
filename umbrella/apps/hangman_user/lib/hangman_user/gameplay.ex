@@ -1,4 +1,8 @@
 defmodule Gameplay do
+
+  @moduledoc """
+  This is a module which interacts with the user while playing a game
+  """
   
   def start do
     IO.puts "Game started"
@@ -6,9 +10,9 @@ defmodule Gameplay do
     IO.inspect HangmanUser.Game.Server.get_game_stats
     IO.puts Game.visualize(HangmanUser.Game.Server.get_game_stats)
     IO.puts Game.wrong_letters(HangmanUser.Game.Server.get_game_stats)
-    if exiter == false do
+    
       ask_for_letter
-    end
+    
   end
 
   def ask_for_letter do

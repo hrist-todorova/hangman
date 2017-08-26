@@ -1,6 +1,10 @@
 defmodule HangmanUser.Game.Server do
   use GenServer
 
+  @moduledoc """
+  This is the server module in which we save current game.
+  """
+
   def start_link do
     GenServer.start_link(__MODULE__, %{}, name: :guest)
   end

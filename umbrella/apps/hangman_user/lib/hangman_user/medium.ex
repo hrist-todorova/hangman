@@ -1,4 +1,8 @@
 defmodule HangmanUser.Medium do
+
+  @moduledoc """
+  This module serves as greeter and finds out the playes username and password
+  """
   
   def user do
     username = IO.gets "Hello stranger!\nWhat's your name? "
@@ -49,7 +53,7 @@ defmodule HangmanUser.Medium do
 
   defp login(username) do
     password = IO.gets "What is your password? "
-    case HangmanUser.Interface.login(String.trim(username), String.trim(password)) do
+    case HangmanGame.Server.login(String.trim(username), String.trim(password)) do
       :ok ->
         IO.puts "Great!\n"
         %{username: String.trim(username)}
@@ -62,7 +66,7 @@ defmodule HangmanUser.Medium do
 
   defp register(username) do
     password = IO.gets "What password do you want to have? "
-    case HangmanUser.Interface.register(String.trim(username), String.trim(password)) do
+    case HangmanGame.Server.register(String.trim(username), String.trim(password)) do
       :ok ->
         IO.puts "Great!\n"
         %{username: String.trim(username)}

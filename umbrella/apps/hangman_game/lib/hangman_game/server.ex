@@ -1,6 +1,10 @@
 defmodule HangmanGame.Server do
   use GenServer
 
+  @moduledoc """
+  This module is a Server in which we hold information about the players and register or log them in the game
+  """
+
   def start_link do
     GenServer.start_link(__MODULE__, [], name: :users)
   end
