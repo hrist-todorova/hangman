@@ -38,6 +38,7 @@ defmodule HangmanUser.Game.Server do
     case game do
       :win ->
         Data.User.Queries.add_win(state.player)
+        Data.Room.Queries.add_win(state.player, state.room)
         {:reply, :stop_win, %{username: state.player, roomname: state.room}}
       :fail ->
         Data.User.Queries.add_fail(state.player)
