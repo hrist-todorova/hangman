@@ -1,9 +1,12 @@
 defmodule HangmanUser.Medium do
 
   @moduledoc """
-  This module serves as greeter and finds out the playes username and password
+  This module serves as greeter and finds out the players username and password
   """
   
+  @doc """
+  Interaction with the user. Returns a map with keys: the chosen username and the room in which that person will play.
+  """
   def user do
     username = IO.gets "Hello stranger!\nWhat's your name? "
     registered = IO.gets "Have you played this game before? Please answer with yes or no. "
@@ -16,6 +19,9 @@ defmodule HangmanUser.Medium do
     %{username: String.trim(username), roomname: String.trim(room)}
   end
 
+  @doc """
+  Returns the chosen room's name.
+  """
   defp rooms(bool) do
     case bool do
       "yes\n" ->
@@ -40,6 +46,9 @@ defmodule HangmanUser.Medium do
     end
   end
 
+  @doc """
+  Returns the username our player will have.
+  """
   defp enter(bool, username) do
     case bool do
       "yes\n" ->
@@ -51,6 +60,9 @@ defmodule HangmanUser.Medium do
     end
   end
 
+  @doc """
+  If we enter the correct password for the user username we continue with the game. If not, we are asked again to give our name and password.
+  """
   defp login(username) do
     password = IO.gets "What is your password? "
     case HangmanGame.Server.login(String.trim(username), String.trim(password)) do
@@ -58,12 +70,15 @@ defmodule HangmanUser.Medium do
         IO.puts "Great!\n"
         String.trim(username)
       :error ->
-        IO.puts "The password is wrong. "
-        IO.puts "Let's try again .."
-        HangmanUser.Medium.user
+        IO.puts "The password is wrong. Let's try again .."
+        name = IO.gets "What is your name?"
+        login(name)
     end
   end
 
+  @doc """
+  Returns our username if there isn't someone with the same in the database. Otherwise we have to think of another one.
+  """
   defp register(username) do
     password = IO.gets "What password do you want to have? "
     case HangmanGame.Server.register(String.trim(username), String.trim(password)) do
@@ -71,12 +86,15 @@ defmodule HangmanUser.Medium do
         IO.puts "Great!\n"
         String.trim(username)
       :error ->
-        IO.puts "There is a person with the same name. "
-        IO.puts "Let's try again .."
-        HangmanUser.Medium.user
+        IO.puts "There is a person with the same name. Let's try again .."
+        name = IO.gets "What is your name?"
+        register(name)
     end
   end
 
+  @doc """
+  Returns us to the enter function because we made a mistake.
+  """
   defp recursive_login(name) do
     IO.puts "Please tell me again: "
     bool = IO.gets "Have you played this game before? Please answer with yes or no."

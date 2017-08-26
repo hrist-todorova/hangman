@@ -30,6 +30,20 @@ defmodule HangmanUser.Game.Server do
     GenServer.call(:guest, {:letter, letter})
   end
 
+  @doc """
+  This functions adds a word to be guessed in the current room.
+  """
+  def add_word(word) do
+    GenServer.call(:guest, {:add, word})
+  end
+
+  @doc """
+  This functions returns the leaderboard.
+  """
+  def get_leaders do
+    GenServer.call(:guest, :leaders)
+  end
+
   def init(_) do
     {:ok, HangmanUser.Medium.user}
   end
@@ -56,5 +70,15 @@ defmodule HangmanUser.Game.Server do
         {:reply, :ok, game}
     end
   end
+
+  def handle_call({:add, word}, _from, state) do
+    Data.Word.Queries.add_word(word, state.username, state.roomname)
+    {:reply, :ok, state}
+  end
+
+  def handle_call(:leaders, _from, state) do
+    {:reply, Data.Room.Queries.leaderboard(state.roomname), state}
+  end
+
   
 end

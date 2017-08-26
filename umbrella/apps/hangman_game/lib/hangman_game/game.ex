@@ -36,6 +36,9 @@ defmodule Game do
     change_state(game, Enum.member?(game.word, letter), letter)
   end
 
+  @doc """
+  Returns :win if the game is over, otherwise it returns the same game with updated visualization.
+  """
   defp change_state(game, true, letter) do
     visual = find_index(game.visualization, game.word, letter, 0)
     if visual == game.word do
@@ -45,10 +48,16 @@ defmodule Game do
     end
   end
 
+  @doc """
+  This function returns :fail because we made 7 mistakes and lost the game.
+  """
   defp change_state(%Game{fails: 7}, false, _) do
     :fail
   end
 
+  @doc """
+  This function returns the current game if we made the same mistake or updated game with the letter marked as wrong.
+  """
   defp change_state(game, false, letter) do
     if Enum.member?(game.wrong_letters, letter) do
       game
@@ -57,6 +66,9 @@ defmodule Game do
     end
   end
 
+  @doc """
+  This function find a letter in a word.
+  """
   defp find_index(_, [], _, _), do: []
   defp find_index(visual, list, letter, index) do
     [vhead | vtail] = visual
