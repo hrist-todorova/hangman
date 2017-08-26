@@ -49,4 +49,17 @@ defmodule Data.Room.Queries do
     |> Enum.map(fn(x) -> x.roomname end)
   end
 
+  @doc """
+  Returns an array of strings with the top 10 players in this room.
+  """
+  def leaderboard(roomname) do
+    from(user in Data.Room,
+      where: user.roomname == ^roomname,
+      order_by: [desc: user.wins],
+      select: [:username, :wins])
+    |> Data.Repo.all
+    |> Enum.map(fn(x) -> "#{x.username}:  #{x.wins}\n" end)
+    |> Enum.take(10)
+  end
+  
 end
