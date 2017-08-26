@@ -7,7 +7,7 @@ defmodule HangmanUser.Medium do
   def user do
     username = IO.gets "Hello stranger!\nWhat's your name? "
     registered = IO.gets "Have you played this game before? Please answer with yes or no. "
-    user = enter(registered, username)
+    username = enter(registered, username)
     IO.puts "I see that you are ready to play! "
     bool = IO.gets "Do you want to create a new room? If you don't I'll show you the existing ones. Please answer with yes or no."
     room = rooms(bool)
@@ -56,7 +56,7 @@ defmodule HangmanUser.Medium do
     case HangmanGame.Server.login(String.trim(username), String.trim(password)) do
       :ok ->
         IO.puts "Great!\n"
-        %{username: String.trim(username)}
+        String.trim(username)
       :error ->
         IO.puts "The password is wrong. "
         IO.puts "Let's try again .."
@@ -69,7 +69,7 @@ defmodule HangmanUser.Medium do
     case HangmanGame.Server.register(String.trim(username), String.trim(password)) do
       :ok ->
         IO.puts "Great!\n"
-        %{username: String.trim(username)}
+        String.trim(username)
       :error ->
         IO.puts "There is a person with the same name. "
         IO.puts "Let's try again .."
