@@ -8,6 +8,7 @@ defmodule HangmanUser.Medium do
     bool = IO.gets "Do you want to create a new room? If you don't I'll show you the existing ones. Please answer with yes or no."
     room = rooms(bool)
     Data.Room.Queries.add_user_to_room(String.trim(room), String.trim(username))
+    IO.puts "Please write Gameplay.start"
     %{username: String.trim(username), roomname: String.trim(room)}
   end
 
