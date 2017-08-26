@@ -4,6 +4,9 @@ defmodule Gameplay do
   This is a module which interacts with the user while playing a game
   """
   
+  @doc """
+  
+  """
   def start do
     IO.puts "Game started"
     HangmanUser.Game.Server.start_game
@@ -17,6 +20,9 @@ defmodule Gameplay do
     
   end
 
+  @doc """
+  This function starts a game by calling a Game.new/1.
+  """
   def ask_for_letter do
     letter = IO.gets "Tell me a letter: "
     result = HangmanUser.Game.Server.guess_a_letter(String.trim(letter))
@@ -41,6 +47,9 @@ defmodule Gameplay do
     end
   end
 
+  @doc """
+  This function starts a game by calling a Game.new/1.
+  """
   def add_word do
     get = IO.gets "Do you want to add a word? "
     case get do

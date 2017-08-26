@@ -9,14 +9,23 @@ defmodule HangmanUser.Game.Server do
     GenServer.start_link(__MODULE__, %{}, name: :guest)
   end
 
+  @doc """
+  This function starts a game by calling a Game.new/1.
+  """
   def start_game do
     GenServer.call(:guest, {:start})
   end
 
+  @doc """
+  This function returns the game state.
+  """
   def get_game_stats do
     GenServer.call(:guest, {:game})
   end
 
+  @doc """
+  This accepts a letter and returns :stop_win if we won the game, :stop_fail if we lost the game and :ok if the game is not done yet.
+  """
   def guess_a_letter(letter) do
     GenServer.call(:guest, {:letter, letter})
   end
